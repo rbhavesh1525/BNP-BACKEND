@@ -1,24 +1,12 @@
-from fastapi import FastAPI,Path
-import json
-
+from fastapi import FastAPI
+from DbConfig.db import supabase
 
 app = FastAPI()
 
-def load_data():
-    with open('patients.json',"r") as file:
-        data = json.load(file)
-    return data
-
-
-
-@app.get("/")
-def home():
-    return {"Message": "Hello, World!"}
-
-
-
-
-
-
-
-
+@app.get("/test-supabase")
+def test_connection():
+    try:
+        _ = supabase.auth  
+        return {"status": "connected"}
+    except Exception as e:
+        return {"status": "not connected", "error": str(e)}
