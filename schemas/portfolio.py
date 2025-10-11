@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any
 
 class RebalancePreferences(BaseModel):
@@ -6,8 +6,8 @@ class RebalancePreferences(BaseModel):
     equity_decrease_percent: float
 
 class InvestmentRequest(BaseModel):
-    investment_amount: float
-    risk_profile: str
+    investment_amount: float = Field(..., alias="amount")
+    risk_profile: str = Field(..., alias="risk")
     tenure: int
     selected_assets: Optional[List[str]] = None
     investment_type: Optional[str] = None
