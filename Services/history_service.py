@@ -1,4 +1,4 @@
-from DbConfig.db import supabase
+from DbConfig.db import supabase_anon
 from fastapi import HTTPException
 
 async def fetch_portfolio_by_id(portfolio_id: str):

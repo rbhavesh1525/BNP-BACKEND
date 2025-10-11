@@ -1,9 +1,11 @@
 from fastapi import FastAPI
-from DbConfig.db import supabase
+# CORRECTED: Import supabase_anon, not supabase
+from DbConfig.db import supabase_anon 
 
 # Import routers
 from routes.mlresponse_route import router as ml_router
-from routes import portfolio_routes, history_routes
+# CORRECTED: Import the new auth router
+from routes import portfolio_routes, history_routes, authRoutes
 
 # Initialize FastAPI
 app = FastAPI(title="AI Portfolio Optimizer")
@@ -12,12 +14,16 @@ app = FastAPI(title="AI Portfolio Optimizer")
 app.include_router(portfolio_routes.router, prefix="/api", tags=["Portfolio"])
 app.include_router(history_routes.router, prefix="/api", tags=["History"])
 app.include_router(ml_router, prefix="/api", tags=["ML Response"])
+# CORRECTED: Include the auth router to make /signup and /login work
+app.include_router(authRoutes.router, prefix="/api/auth", tags=["Authentication"])
+
 
 # Test Supabase
 @app.get("/test-supabase")
 def test_connection():
     try:
-        _ = supabase.auth
+        # CORRECTED: Use supabase_anon, which is the imported client
+        _ = supabase_anon.auth.get_user()
         return {"status": "connected"}
     except Exception as e:
         return {"status": "not connected", "error": str(e)}

@@ -40,3 +40,22 @@ class PortfolioResponse(BaseModel):
     per_asset_projection: Dict[str, AssetProjection]
     per_asset_explanations: Optional[Dict[str, AssetExplanation]] = None
     portfolio_summary: PortfolioSummary
+# Add these new classes to the file
+
+class CurrentHolding(BaseModel):
+    asset_name: str = Field(..., description="The name of the asset, e.g., 'S&P 500 (includes dividends)'")
+    current_value: float = Field(..., gt=0, description="The current market value of this holding")
+
+class RebalanceRequest(BaseModel):
+    current_holdings: List[CurrentHolding]
+    risk_profile: str = Field(..., description="The target risk profile, e.g., 'low', 'moderate', 'high'")
+
+class RebalanceAction(BaseModel):
+    asset_name: str
+    action: str # "Sell" or "Buy"
+    amount: float = Field(..., description="The dollar amount to buy or sell")
+
+class RebalanceResponse(BaseModel):
+    target_allocation: Dict[str, float]
+    rebalancing_actions: List[RebalanceAction]
+    total_portfolio_value: float
