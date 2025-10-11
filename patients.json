@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "Rohit Sharma",
+    "age": 32,
+    "gender": "Male",
+    "city": "Mumbai",
+    "disease": "Diabetes"
+  },
+  {
+    "id": 2,
+    "name": "Priya Mehta",
+    "age": 25,
+    "gender": "Female",
+    "city": "Ahmedabad",
+    "disease": "Asthma"
+  }
+]
