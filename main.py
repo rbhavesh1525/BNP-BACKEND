@@ -3,6 +3,11 @@ from DbConfig.db import supabase
 
 app = FastAPI()
 
+
+from routes.mlresponse_route import router as ml_router
+
+
+app.include_router(ml_router)
 @app.get("/test-supabase")
 def test_connection():
     try:
