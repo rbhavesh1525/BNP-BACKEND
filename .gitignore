@@ -1,1 +1,22 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Env files
 .env
+.env.*
+
+# Logs
+logs
+*.log
+
+# Build files
+dist/
+build/
+.tmp/
+
+# OS / Editor
+.DS_Store
+.vscode/
+.idea/
